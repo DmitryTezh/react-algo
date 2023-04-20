@@ -1,25 +1,26 @@
 import { invariant } from '../utils';
 import { EvklidExtendedGCD } from './primes';
 
-export const InverseNumberByModulo = (x: number, modulo: number): number => {
-    const [,, y] = EvklidExtendedGCD(modulo, x);
-    invariant((x * y) % modulo === 1);
-    return y;
-};
+const DIGITS = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
 
 export const convertNumberToBase = (num: number, base: number) => {
-    const digits = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-    invariant(base <= digits.length);
+    invariant(base <= DIGITS.length);
     let result = '';
     let remainder = num;
     while (remainder > 0) {
-        result = digits[remainder % base] + result;
+        result = DIGITS[remainder % base] + result;
         remainder = Math.floor(remainder / base);
     }
     return result;
 };
 
-export const powerByModulo = (num: number, power: number, modulo: number): number => {
+export const inverseNumberByModulo = (x: number, modulo: number): number => {
+    const [,, y] = EvklidExtendedGCD(modulo, x);
+    invariant((x * y) % modulo === 1);
+    return y;
+};
+
+export const powerNumberByModulo = (num: number, power: number, modulo: number): number => {
     let result = num;
     const bits = convertNumberToBase(power, 2);
     for (let i = bits.length - 2; i >= 0; i--) {
