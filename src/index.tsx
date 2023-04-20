@@ -23,4 +23,6 @@ reportWebVitals();
 //console.warn(Numbers.reverse(7896541));
 //console.warn(Strings.Permutations('abcd'));
 //console.warn(Numbers.EratosthenesPrimes(100));
-console.warn(Numbers.InverseNumberByModulo(2, 4));
+console.warn(Numbers.InverseNumberByModulo(13, 121));
+console.warn(Numbers.convertNumberToBase(109, 2));
+console.warn(Numbers.powerByModulo(13, 109, 121));

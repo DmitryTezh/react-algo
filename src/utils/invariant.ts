@@ -1,5 +1,6 @@
-export const invariant = (condition: boolean, error: string) => {
-    if (!condition) {
-        throw Error(error);
+export const invariant = (condition: boolean, error?: string) => {
+    if (condition) {
+        return;
     }
+    throw Error(error ?? 'Invariant broken');
 };

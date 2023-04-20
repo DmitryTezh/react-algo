@@ -1,5 +1,3 @@
-import { invariant } from '../utils';
-
 export const EratosthenesPrimes = (num: number): number[] => {
     const numbers = Array(num - 1).fill(0).map((n, i) => i + 2);
     let divider = 2;
@@ -32,10 +30,4 @@ export const EvklidExtendedGCD = (a: number, b: number): [number, number, number
     }
     const [d, x, y] = EvklidExtendedGCD(b, a % b);
     return [d, y, x - y * Math.floor(a / b)];
-};
-
-export const InverseNumberByModulo = (x: number, modulo: number): number => {
-    const [,, y] = EvklidExtendedGCD(modulo, x);
-    invariant(x * y % modulo === 1, 'Invariant broken')
-    return y;
 };
