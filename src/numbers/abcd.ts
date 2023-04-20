@@ -1,4 +1,4 @@
-export const resolveABCD = (power: number): number => {
+export const ABCD = (power: number): number => {
     let counter = 0;
     const results = new Map<number, [number, number][]>();
 

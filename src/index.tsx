@@ -19,8 +19,8 @@ root.render(
 // to log results (for example: reportWebVitals(console.log))
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 reportWebVitals();
-//console.warn(Numbers.resolveABCD(3));
+//console.warn(Numbers.ABCD(3));
 //console.warn(Numbers.reverse(7896541));
-//console.warn(Strings.getPermutations('abcd'));
-//console.warn(Numbers.Eratosthenes(100));
-console.warn(Numbers.GCD(3009,894));
+//console.warn(Strings.Permutations('abcd'));
+//console.warn(Numbers.EratosthenesPrimes(100));
+console.warn(Numbers.InverseNumberByModulo(2, 4));
