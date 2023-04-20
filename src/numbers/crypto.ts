@@ -29,7 +29,6 @@ export const powerNumberByModulo = (num: number, power: number, modulo: number):
             result *= num;
         }
         result %= modulo;
-        console.warn(result)
     }
     return result;
 };

@@ -21,7 +21,7 @@ root.render(
 reportWebVitals();
 //console.warn(Numbers.ABCD(3));
 //console.warn(Numbers.reverse(7896541));
-//console.warn(Strings.Permutations('abcd'));
+//console.warn(Strings.permutations('abcd'));
 //console.warn(Numbers.EratosthenesPrimes(100));
 console.warn(Numbers.convertNumberToBase(109, 2));
 console.warn(Numbers.inverseNumberByModulo(13, 121));

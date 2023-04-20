@@ -15,6 +15,6 @@ const evaluatePermutations = (elements: string[]): string[][] => {
     ]);
 };
 
-export const Permutations = (elements: string): string[][] => {
+export const permutations = (elements: string): string[][] => {
     return evaluatePermutations(elements.split(''));
 };
