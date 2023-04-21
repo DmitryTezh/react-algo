@@ -1,4 +1,6 @@
 export * from './abcd';
-export * from './crypto';
+export * from './factorial';
+export * from './gcd';
+export * from './modulo';
 export * from './reverse';
 export * from './primes';

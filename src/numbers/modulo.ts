@@ -1,5 +1,5 @@
 import { invariant } from '../utils';
-import { EvklidExtendedGCD } from './primes';
+import { EvklidExtendedGCD } from '.';
 
 const DIGITS = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
 
