@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import * as Crypto from './crypto';
 import * as Numbers from './numbers';
 import * as Strings from './strings';
 
@@ -23,6 +24,7 @@ reportWebVitals();
 //console.warn(Numbers.reverse(7896541));
 //console.warn(Strings.permutations('abcd'));
 //console.warn(Numbers.EratosthenesPrimes(100));
-console.warn(Numbers.convertNumberToBase(109, 2));
-console.warn(Numbers.inverseNumberByModulo(13, 121));
-console.warn(Numbers.powerNumberByModulo(13, 109, 121));
+//console.warn(Numbers.convertNumberToBase(109, 2));
+//console.warn(Numbers.inverseNumberByModulo(13, 121));
+//console.warn(Numbers.powerNumberByModulo(13, 109, 121));
+console.warn(Crypto.generateKeys({ keyLength: 20 }));

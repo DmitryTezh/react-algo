@@ -33,4 +33,4 @@ export const ABCD = (power: number): number => {
     }
 
     return counter;
-}
+};

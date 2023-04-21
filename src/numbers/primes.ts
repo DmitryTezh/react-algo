@@ -1,4 +1,5 @@
 import { factorial, powerNumberByModulo } from '.';
+import { invariant } from '../utils';
 
 export const isExactlyPrime = (p: number): boolean => {
     const maxDivider = Math.floor(Math.sqrt(p));
@@ -24,6 +25,25 @@ export const isWilsonPrime = (p: number): boolean => {
     }
     const fact = factorial(p - 1);
     return (fact + 1) % p === 0;
+};
+
+type FermatPrimeIndices = '0' | '1' | '2' | '3' | '4';
+type FermatPrimeKey<key extends FermatPrimeIndices = FermatPrimeIndices> = `F${key}`;
+type FermatPrimeNumbers = {
+    [key in FermatPrimeKey]: number;
+};
+
+const FermatNumberGenerator = (k: number): number => {
+    return 2 ** 2 ** k + 1;
+};
+
+export const FermatPrimes = (): FermatPrimeNumbers => {
+    const fermatPrimes: FermatPrimeNumbers = Array(5).fill(0).reduce((f, v, index) => {
+        f[`F${index}`] = FermatNumberGenerator(index);
+        return f;
+    }, {});
+    invariant(Object.values(fermatPrimes).every(f => isExactlyPrime(f)));
+    return fermatPrimes;
 };
 
 export const EratosthenesPrimes = (num: number): number[] => {

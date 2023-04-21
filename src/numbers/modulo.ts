@@ -16,8 +16,8 @@ export const convertNumberToBase = (num: number, base: number) => {
 
 export const inverseNumberByModulo = (x: number, modulo: number): number => {
     const [,, y] = EvklidExtendedGCD(modulo, x);
-    invariant((x * y) % modulo === 1);
-    return y;
+    invariant((x * (y + modulo)) % modulo === 1);
+    return y > 0 ? y : y + modulo;
 };
 
 export const powerNumberByModulo = (num: number, power: number, modulo: number): number => {
