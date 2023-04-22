@@ -1,4 +1,4 @@
-import { invariant } from '../utils';
+import { invariant, memoize } from '../utils';
 import { EvklidExtendedGCD } from '.';
 
 const DIGITS = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
@@ -31,4 +31,28 @@ export const powerNumberByModulo = (num: number, power: number, modulo: number):
         result %= modulo;
     }
     return result;
+};
+
+type ChineseRemainder = {
+    m: number;
+    r: number;
+};
+
+const calculateChineseBasis = memoize((M: number, modulos: number[]): Map<number, number> => {
+    const basis: [number, number][] = modulos.map(m => {
+        const Mm = M / m;
+        const Mm1 = inverseNumberByModulo(Mm, m);
+        return [m, Mm * Mm1];
+    });
+    return new Map(basis);
+});
+
+export const chineseRemainder = (remainders: ChineseRemainder[]): number => {
+    const modulos = remainders.map(r => r.m);
+    const M = modulos.reduce((M, m) => M * m);
+    const basis = calculateChineseBasis(M, modulos);
+    const R = remainders.reduce((R, r) => {
+        return R + r.r * (basis.get(r.m) ?? 0);
+    }, 0);
+    return R % M;
 };
