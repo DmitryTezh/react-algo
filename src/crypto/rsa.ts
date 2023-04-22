@@ -1,4 +1,11 @@
-import { bitsOf, EratosthenesPrimes, FermatPrimes, inverseNumberByModulo, powerNumberByModulo } from '../numbers';
+import {
+    bitsOf,
+    chineseRemainder,
+    EratosthenesPrimes,
+    FermatPrimes,
+    inverseNumberByModulo,
+    powerNumberByModulo,
+} from '../numbers';
 import { invariant } from '../utils';
 
 export interface PublicKey {
@@ -61,11 +68,21 @@ export const generateKeys = (options: KeyOptions): KeyPair => {
 };
 
 export const encrypt = (num: number, pub: PublicKey): number => {
-    invariant(num < pub.n, 'RSA violation: Encrypting value must not exceed modulo');
-    return powerNumberByModulo(num, pub.e, pub.n)
+    const { e, n } = pub;
+    invariant(num < n, 'RSA violation: Encrypting value must not exceed modulo');
+    return powerNumberByModulo(num, e, n);
 };
 
 export const decrypt = (num: number, ppk: PrivateKey): number => {
-    invariant(num < ppk.n, 'RSA violation: Decrypting value must not exceed modulo');
-    return powerNumberByModulo(num, ppk.d, ppk.n)
+    const { d, n, p, q } = ppk;
+    invariant(num < n, 'RSA violation: Decrypting value must not exceed modulo');
+    if (p == null || q == null) {
+        return powerNumberByModulo(num, d, n);
+    }
+    const a = powerNumberByModulo(num, d, p);
+    const b = powerNumberByModulo(num, d, q);
+    return chineseRemainder([
+        { r: a, m: p },
+        { r: b, m: q },
+    ]);
 };

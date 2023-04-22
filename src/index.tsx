@@ -27,13 +27,13 @@ reportWebVitals();
 //console.warn(Numbers.convertNumberToBase(109, 2));
 //console.warn(Numbers.inverseNumberByModulo(13, 121));
 //console.warn(Numbers.powerNumberByModulo(13, 109, 121));
-const keyPair = Crypto.generateKeys({ keyLength: 7, includePrimesInPrivateKey: true });
-const encrypted = Crypto.encrypt(12345, keyPair.publicKey);
-const decrypted = Crypto.decrypt(encrypted, keyPair.privateKey);
-console.warn(keyPair);
-console.warn('12345 -> %s -> %s', encrypted, decrypted);
 console.warn(Numbers.chineseRemainder([
     { r: 2, m: 3 },
     { r: 3, m: 5 },
     { r: 2, m: 7 },
 ]));
+const keyPair = Crypto.generateKeys({ keyLength: 7, includePrimesInPrivateKey: true });
+const encrypted = Crypto.encrypt(12345, keyPair.publicKey);
+const decrypted = Crypto.decrypt(encrypted, keyPair.privateKey);
+console.warn(keyPair);
+console.warn('12345 -> %s -> %s', encrypted, decrypted);
