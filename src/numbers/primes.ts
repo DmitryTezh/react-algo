@@ -47,7 +47,7 @@ export const FermatPrimes = once((): FermatPrimeNumbers => {
             f[`F${index}`] = FermatNumberGenerator(index);
             return f;
         }, {});
-    invariant(Object.values(fermatPrimes).every(f => isExactlyPrime(f)));
+    invariant(Object.values(fermatPrimes).every(f => isFermatPrime(f)));
     return fermatPrimes;
 });
 

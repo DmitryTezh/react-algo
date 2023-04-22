@@ -29,7 +29,7 @@ const random = (min: number, max: number) => {
 
 export const generateKeys = (options: KeyOptions): KeyPair => {
     const { keyLength, includePrimesInPrivateKey } = options;
-    invariant(keyLength <= 10, 'RSA violation: Exceeded key length');
+    invariant(keyLength <= 10, 'RSA violation: Key length exceeded');
 
     const primes = EratosthenesPrimes(2 ** (keyLength + 1) - 1).filter(p => bitsOf(p, 2) === keyLength);
     invariant(primes.length > 0, 'RSA violation: No primes found');
