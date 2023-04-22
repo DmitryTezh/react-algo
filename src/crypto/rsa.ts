@@ -29,10 +29,10 @@ const random = (min: number, max: number) => {
 
 export const generateKeys = (options: KeyOptions): KeyPair => {
     const { keyLength, includePrimesInPrivateKey } = options;
-    invariant(keyLength <= 20, 'Exceeded key length');
+    invariant(keyLength <= 20, 'RSA violation: Exceeded key length');
 
     const primes = EratosthenesPrimes(2 ** (keyLength + 1) - 1).filter(p => bitsOf(p, 2) === keyLength);
-    invariant(primes.length > 0, 'No primes found');
+    invariant(primes.length > 0, 'RSA violation: No primes found');
 
     const p = primes[random(0, primes.length)];
     let q = primes[random(0, primes.length)];
@@ -40,7 +40,7 @@ export const generateKeys = (options: KeyOptions): KeyPair => {
     while (p === q && i++ < 10) {
         q = primes[random(0, primes.length)];
     }
-    invariant(p !== q, 'Equal primes prohibited');
+    invariant(p !== q, 'RSA violation: Equal primes prohibited');
 
     const modulo = p * q;
     const phi = (p - 1) * (q - 1);
@@ -61,11 +61,11 @@ export const generateKeys = (options: KeyOptions): KeyPair => {
 };
 
 export const encrypt = (num: number, pub: PublicKey): number => {
-    invariant(num < pub.n);
+    invariant(num < pub.n, 'RSA violation: Encrypting value must not exceed modulo');
     return powerNumberByModulo(num, pub.e, pub.n)
 };
 
 export const decrypt = (num: number, ppk: PrivateKey): number => {
-    invariant(num < ppk.n);
+    invariant(num < ppk.n, 'RSA violation: Decrypting value must not exceed modulo');
     return powerNumberByModulo(num, ppk.d, ppk.n)
 };
