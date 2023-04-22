@@ -28,7 +28,7 @@ export interface KeyPair {
     privateKey: PrivateKey,
 }
 
-// Опции для геренерации ключей
+// Опции для генерации ключей
 export interface KeyOptions {
     keyLength: number;
     includePrimesInPrivateKey?: boolean;
@@ -56,9 +56,9 @@ export const generateKeys = (options: KeyOptions): KeyPair => {
     }
     invariant(p !== q, 'RSA violation: Equal primes prohibited');
 
-    // 3. Модуль
+    // 3. Вычисляем модуль
     const modulo = p * q;
-    // 4. Значение ф-ции Эйлера
+    // 4. Вычисляем значение ф-ции Эйлера
     const phi = (p - 1) * (q - 1);
     // 5. Публичный ключ готов
     const publicKey: PublicKey = {
