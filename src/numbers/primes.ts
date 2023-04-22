@@ -1,6 +1,7 @@
 import { factorial, powerNumberByModulo } from '.';
 import { invariant, once } from '../utils';
 
+// Алгоритм проверки числа на простоту через теорему о наименьшем делителе
 export const isExactlyPrime = (p: number): boolean => {
     const maxDivider = Math.floor(Math.sqrt(p));
     for (let divider = 2; divider <= maxDivider; divider++) {
@@ -11,17 +12,20 @@ export const isExactlyPrime = (p: number): boolean => {
     return true;
 };
 
+// Тест Ферма на простоту
 export const isFermatPrime = (p: number): boolean => {
     if (p % 2 === 0) {
         return true;
     }
     const power = powerNumberByModulo(2, p - 1, p);
+    // Простое или псевдо-простое число (число Кармайкла) - нужна дополнительная проверка
     if (power === 1) {
         return isExactlyPrime(p);
     }
     return false;
 };
 
+// Тест Вильсона на простоту
 export const isWilsonPrime = (p: number): boolean => {
     if (p % 2 === 0) {
         return true;
@@ -30,16 +34,19 @@ export const isWilsonPrime = (p: number): boolean => {
     return (fact + 1) % p === 0;
 };
 
+// Простые числа Ферма вида 2 ^ 2 ^ k + 1
 type FermatPrimeIndices = '0' | '1' | '2' | '3' | '4';
 type FermatPrimeKey<key extends FermatPrimeIndices = FermatPrimeIndices> = `F${key}`;
 type FermatPrimeNumbers = {
     [key in FermatPrimeKey]: number;
 };
 
+// Генератор простых чисел Ферма
 const FermatNumberGenerator = (k: number): number => {
     return 2 ** 2 ** k + 1;
 };
 
+// Все известные простые числа Ферма
 export const FermatPrimes = once((): FermatPrimeNumbers => {
     const fermatPrimes: FermatPrimeNumbers = Array(5)
         .fill(0)
@@ -51,6 +58,7 @@ export const FermatPrimes = once((): FermatPrimeNumbers => {
     return fermatPrimes;
 });
 
+// Алгоритм решета Эратосфена
 export const EratosthenesPrimes = (num: number): number[] => {
     const numbers = Array(num - 1).fill(0).map((n, i) => i + 2);
     let divider = 2;

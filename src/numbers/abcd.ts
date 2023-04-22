@@ -1,3 +1,4 @@
+// Решить уравнение в целых числах: a^3 + b^3 = c^3 + d^3
 export const ABCD = (power: number): number => {
     let counter = 0;
     const results = new Map<number, [number, number][]>();

@@ -1,3 +1,4 @@
+// Посчитать сумму цифр целого числа
 export const sumOfDigits = (num: number): number => {
     let digits = 0;
     let remainder = num;
@@ -8,6 +9,7 @@ export const sumOfDigits = (num: number): number => {
     return digits;
 };
 
+// Посчитать разрядность целого числа в системе счисления
 export const bitsOf = (num: number, base: number): number => {
     let bits = -1;
     let remainder = num;

@@ -3,6 +3,7 @@ import { EvklidExtendedGCD } from '.';
 
 const DIGITS = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
 
+// Преобразовать число из десятичной системы счисления в другую
 export const convertNumberToBase = (num: number, base: number) => {
     invariant(base <= DIGITS.length);
     let result = '';
@@ -14,12 +15,14 @@ export const convertNumberToBase = (num: number, base: number) => {
     return result;
 };
 
+// Вычислить обратный вычет x^(-1) по модулю
 export const inverseNumberByModulo = (x: number, modulo: number): number => {
     const [,, y] = EvklidExtendedGCD(modulo, x);
     invariant((x * (y + modulo)) % modulo === 1);
     return y >= 0 ? y : y + modulo;
 };
 
+// Возвести число в степень по модулю
 export const powerNumberByModulo = (num: number, power: number, modulo: number): number => {
     let result = 1;
     const bits = convertNumberToBase(power, 2);
@@ -47,12 +50,13 @@ const calculateChineseBasis = memoize((M: number, modulos: number[]): Map<number
     return new Map(basis);
 });
 
+// Китайская теорема об остатках (КТО)
 export const chineseRemainder = (remainders: ChineseRemainder[]): number => {
     const modulos = remainders.map(r => r.m);
     const M = modulos.reduce((M, m) => M * m);
     const basis = calculateChineseBasis(M, modulos);
-    const R = remainders.reduce((R, r) => {
-        return R + r.r * (basis.get(r.m) ?? 0);
+    const R = remainders.reduce((R, { r, m }) => {
+        return R + r * (basis.get(m) ?? 0);
     }, 0);
     return R % M;
 };

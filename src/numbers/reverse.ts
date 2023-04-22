@@ -1,3 +1,4 @@
+// Перевернуть целое число
 export const reverse = (num: number): number => {
     let remainder = num;
     const digits: number[] = [];

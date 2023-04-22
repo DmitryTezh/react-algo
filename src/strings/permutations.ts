@@ -15,6 +15,7 @@ const evaluatePermutations = (elements: string[]): string[][] => {
     ]);
 };
 
+// Все перестановки множества
 export const permutations = (elements: string): string[][] => {
     return evaluatePermutations(elements.split(''));
 };
