@@ -16,7 +16,10 @@ export const isFermatPrime = (p: number): boolean => {
         return true;
     }
     const power = powerNumberByModulo(2, p - 1, p);
-    return power === 1;
+    if (power === 1) {
+        return isExactlyPrime(p);
+    }
+    return false;
 };
 
 export const isWilsonPrime = (p: number): boolean => {
