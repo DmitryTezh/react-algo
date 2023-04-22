@@ -21,11 +21,11 @@ export const inverseNumberByModulo = (x: number, modulo: number): number => {
 };
 
 export const powerNumberByModulo = (num: number, power: number, modulo: number): number => {
-    let result = num;
+    let result = 1;
     const bits = convertNumberToBase(power, 2);
-    for (let i = bits.length - 2; i >= 0; i--) {
+    for (const bit of bits) {
         result *= result;
-        if (bits[i+1] === '1') {
+        if (bit === '1') {
             result *= num;
         }
         result %= modulo;
