@@ -29,12 +29,19 @@ const random = (min: number, max: number) => {
 
 export const generateKeys = (options: KeyOptions): KeyPair => {
     const { keyLength, includePrimesInPrivateKey } = options;
-    invariant(keyLength <= 20);
+    invariant(keyLength <= 20, 'Exceeded key length');
+
     const primes = EratosthenesPrimes(2 ** (keyLength + 1) - 1).filter(p => bitsOf(p, 2) === keyLength);
-    invariant(primes.length > 0);
+    invariant(primes.length > 0, 'No primes found');
+
     const p = primes[random(0, primes.length)];
-    const q = primes[random(0, primes.length)];
-    invariant(p !== q);
+    let q = primes[random(0, primes.length)];
+    let i = 0;
+    while (p === q && i++ < 10) {
+        q = primes[random(0, primes.length)];
+    }
+    invariant(p !== q, 'Equal primes prohibited');
+
     const modulo = p * q;
     const phi = (p - 1) * (q - 1);
     const publicKey: PublicKey = {
@@ -46,6 +53,7 @@ export const generateKeys = (options: KeyOptions): KeyPair => {
         n: modulo,
         ...(includePrimesInPrivateKey && { p, q }),
     };
+
     return {
         publicKey,
         privateKey,
@@ -53,9 +61,11 @@ export const generateKeys = (options: KeyOptions): KeyPair => {
 };
 
 export const encrypt = (num: number, pub: PublicKey): number => {
+    invariant(num < pub.n);
     return powerNumberByModulo(num, pub.e, pub.n)
 };
 
 export const decrypt = (num: number, ppk: PrivateKey): number => {
+    invariant(num < ppk.n);
     return powerNumberByModulo(num, ppk.d, ppk.n)
 };
