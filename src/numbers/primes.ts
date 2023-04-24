@@ -14,8 +14,9 @@ export const isExactlyPrime = (p: number): boolean => {
 
 // Тест Ферма на простоту
 export const isFermatPrime = (p: number): boolean => {
+    // Все четные числа, кроме 2 - составные
     if (p % 2 === 0) {
-        return true;
+        return p === 2;
     }
     const power = powerNumberByModulo(2, p - 1, p);
     // Простое или псевдо-простое число (число Кармайкла) - нужна дополнительная проверка
@@ -27,8 +28,9 @@ export const isFermatPrime = (p: number): boolean => {
 
 // Тест Вильсона на простоту
 export const isWilsonPrime = (p: number): boolean => {
+    // Все четные числа, кроме 2 - составные
     if (p % 2 === 0) {
-        return true;
+        return p === 2;
     }
     const fact = factorial(p - 1);
     return (fact + 1) % p === 0;
@@ -41,7 +43,7 @@ type FermatPrimeNumbers = {
     [key in FermatPrimeKey]: number;
 };
 
-// Генератор простых чисел Ферма
+// Генератор чисел Ферма
 const FermatNumberGenerator = (k: number): number => {
     return 2 ** 2 ** k + 1;
 };
