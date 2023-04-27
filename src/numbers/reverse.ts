@@ -1,13 +1,12 @@
 // Перевернуть целое число
 export const reverse = (num: number): number => {
+    let result = 0;
     let remainder = num;
-    const digits: number[] = [];
+    const sign = Math.sign(num);
     while (remainder > 0) {
         const digit = remainder % 10;
-        digits.push(digit);
-        remainder = (remainder - digit) / 10;
+        result = result * 10 + sign * digit;
+        remainder = Math.floor(remainder / 10);
     }
-    return digits.reverse().reduce((sum, digit, index) => {
-        return sum + digit * 10 ** index;
-    }, 0);
+    return result;
 };
