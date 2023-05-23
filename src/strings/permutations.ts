@@ -1,5 +1,5 @@
-const swapArray = (elements: string[], i: number, j: number): string[] => {
-    const copy = [...elements];
+const swapItems = (items: string[], i: number, j: number): string[] => {
+    const copy = [...items];
     if (i !== j) {
         const temp = copy[i];
         copy[i] = copy[j];
@@ -15,7 +15,7 @@ const permute = (elements: string[], onlyUnique?: boolean): string[][] => {
         const levelPermutations: string[][] = [];
         for (const permutation of allPermutations) {
             for (let j = i + 1; j < elements.length; j++) {
-                const swapPermutation = swapArray(permutation, i, j);
+                const swapPermutation = swapItems(permutation, i, j);
                 const key = swapPermutation.join('');
                 if (seen == null || !seen.has(key)) {
                     seen?.add(key);
